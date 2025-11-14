@@ -57,7 +57,7 @@
       button { pointer-events: auto; }
     </style>
     <button id="min-toggle">+/-</button>
-    <div id="mymel2001-ai-panel" class="mymel2001-ai-panel">
+    <div id="mymel2001-ai-panel" class="mymel2001-ai-panel hidden">
       <div class="tabs">
         <button id="tab-chat" class="tab active">CHAT</button>
         <button id="tab-settings" class="tab">SETTINGS</button>
