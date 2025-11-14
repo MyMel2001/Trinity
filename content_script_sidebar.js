@@ -111,6 +111,10 @@
     const hidden = panelWrapper.classList.toggle('hidden');
     minMax.style.right = hidden ? '0' : '380px';
   };
+  // --- Make Minimize Toggle Draggable ---
+  minMax.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", e.target.id);
+  });
 
   // --- Safe Chrome Storage Access ---
   const storage = chrome.storage.sync;
