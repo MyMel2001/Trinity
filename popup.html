@@ -1,0 +1,24 @@
+
+<!doctype html><html><head><meta charset="utf-8"><title>Agentic Sidebar</title>
+<style>body{font-family:monospace;padding:12px;background:#000;color:#0f0;}button{padding:8px;border:1px solid #073;background:transparent;color:#0f0;}</style>
+</head><body>
+  <h3>Agentic Sidebar</h3>
+  <div><button id="focus">Focus Sidebar</button></div>
+  <div style="margin-top:8px;"><label>Quick prompt</label><textarea id="qp" style="width:100%;height:80px;background:#000;color:#0f0;border:1px solid #073;"></textarea></div>
+  <div style="margin-top:8px;"><button id="send">Send & Open</button></div>
+<script>
+document.getElementById('focus').onclick = async () => {
+  const [tab] = await chrome.tabs.query({active:true,currentWindow:true});
+  chrome.tabs.sendMessage(tab.id, { type: 'focusSidebar' }, (r) => {});
+};
+document.getElementById('send').onclick = async () => {
+  const prompt = document.getElementById('qp').value;
+  const data = { prompt };
+  if (chrome.storage.session) chrome.storage.session.set({ agentic_quick_prompt: data });
+  else chrome.storage.local.set({ agentic_quick_prompt: data });
+  const [tab] = await chrome.tabs.query({active:true,currentWindow:true});
+  chrome.tabs.sendMessage(tab.id, { type: 'focusSidebar' }, (r) => {});
+  window.close();
+};
+</script>
+</body></html>
